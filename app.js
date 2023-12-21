@@ -34,7 +34,7 @@ const cacheMiddleware = (req, res, next) => {
   const cachedData = cache.get(key);
 
   if (cachedData) {
-    console.log('Cache hit!');
+    console.log('Cached');
     res.json(cachedData);
   } else {
     console.log('Cache miss!');
