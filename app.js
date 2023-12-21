@@ -66,7 +66,7 @@ app.post('/users', (req, res) => {
 });
 
 // Read
-app.get('/users', cacheMiddleware, (req, res) => {
+app.get('/users', (req, res) => {
   const query = 'SELECT * FROM crud';
   db.query(query, (err, result) => {
     if (err) {

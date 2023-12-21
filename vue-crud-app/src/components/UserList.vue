@@ -1,11 +1,27 @@
 <template>
     <div>
-      <h1>User List</h1>
-      <ul>
-        <li v-for="user in userList" :key="user.user_id">
-          {{ user.user_name }} - {{ user.user_email }} - {{ user.user_phone }} - {{ user.user_address }}
-        </li>
-      </ul>
+      <h1 class="mt-4 mb-4">User List</h1>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" v-model="searchQuery" placeholder="Search by name">
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="user in filteredUserList" :key="user.user_id">
+            <td>{{ user.user_name }}</td>
+            <td>{{ user.user_email }}</td>
+            <td>{{ user.user_phone }}</td>
+            <td>{{ user.user_address }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </template>
   
@@ -17,17 +33,21 @@
         required: true,
       },
     },
+    data() {
+      return {
+        searchQuery: '',
+      };
+    },
+    computed: {
+      filteredUserList() {
+        const query = this.searchQuery.toLowerCase();
+        return this.userList.filter(user => user.user_name.toLowerCase().includes(query));
+      },
+    },
   };
   </script>
   
   <style scoped>
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 10px;
-  }
+  /* You can add custom styles here */
   </style>
   
